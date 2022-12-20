@@ -11,13 +11,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.List;
 
 public class C02_Dropdown {
 
     WebDriver driver;
 
     @Before
-    public void setup(){
+    public void setup() {
         //Driver ile ilgili her turlu initial(baslangic) islemi burada yapilir
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -26,13 +27,13 @@ public class C02_Dropdown {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         // test sonrasinda driver kapatmak (varsa raporlari dosyalamak) icin kullanilir.
         //driver.quit();
     }
 
     @Test
-    public void selectByIndex(){
+    public void selectByIndex() {
         driver.get("https://demo.guru99.com/test/newtours/register.php");
 
         //Dropdown locate edildi
@@ -49,7 +50,8 @@ public class C02_Dropdown {
     }
 
     @Test
-    public void selectByValue(){
+    public void selectByValue() {
+
         driver.get("https://demo.guru99.com/test/newtours/register.php");
 
         //Dropdown locate edildi
@@ -58,16 +60,13 @@ public class C02_Dropdown {
         //Locate edilen dropdown select objesine donusturuldu
         Select select = new Select(drpDown);
 
-        select.selectByValue("TURKEY"); // TURKEY
+        select.selectByValue("TURKEY");
 
-        //selectByIndex() metodu 0 ile baslar.
-
-
-
+        // selectByValue() metodu option elementlerinin value attribute unun degerine gore secim yapar.
     }
 
     @Test
-    public void selectByVisibleText(){
+    public void selectByVisibleText() {
 
         driver.get("https://demo.guru99.com/test/newtours/register.php");
 
@@ -78,24 +77,64 @@ public class C02_Dropdown {
         Select select = new Select(drpDown);
 
         select.selectByVisibleText("NEPAL");
-        System.out.println(select.isMultiple());
-
     }
-@Test
-    public void multipleSelect(){
+
+
+    @Test
+    public void multipleSelect() {
+
         driver.get("https://output.jsbin.com/osebed/2");
 
-        //dropdow locate ediliyor
-        Select select= new Select(driver.findElement(By.id("fruits")));
+        //Dropdown locate ediliyor
+        Select select = new Select(driver.findElement(By.id("fruits")));
 
-    System.out.println(select.isMultiple());
+        System.out.println(select.isMultiple());
 
-    select.selectByValue("apple");
+        select.selectByValue("apple");
 
-    select.selectByIndex(3);
-}
+        select.selectByIndex(3);  //Grape
+
+    }
+
+    @Test
+    public void getOptions() {
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+
+        Select select = new Select(driver.findElement(By.name("country")));
+
+        // getOptions() metodu select elementinin tum seceneklerini (optionlarini) bir liste icerisinde bize verir
+        List<WebElement> options = select.getOptions();
 
 
+        for (WebElement option : options) {
+            System.out.println(option.getText());
+        }
+    }
+
+    @Test
+    public void getFirstSelectedOption() {
+
+        driver.get("https://output.jsbin.com/osebed/2");
+
+        Select select = new Select(driver.findElement(By.id("fruits")));
+
+        select.selectByIndex(3); //Grape
+        select.selectByIndex(2); //Orange
+
+        WebElement selectedOption = select.getFirstSelectedOption();
+        System.out.println(selectedOption.getText());
+
+        //getFirstSelectedOption() metodu secili olan ilk option elementini bize verir. (Sectigimiz ilk option degil !!!)
+
+        @Test
+        public void getFirstSelectedOption () {
+
+            driver.get("https://output.jsbin.com/osebed/2");
+
+            Select select = new Select(driver.findElement(By.id("fruits")));
 
 
+        }
+
+    }
 }
