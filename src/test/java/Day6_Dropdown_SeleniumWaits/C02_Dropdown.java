@@ -18,7 +18,7 @@ public class C02_Dropdown {
     WebDriver driver;
 
     @Before
-    public void setup() {
+    public void setup(){
         //Driver ile ilgili her turlu initial(baslangic) islemi burada yapilir
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -27,13 +27,13 @@ public class C02_Dropdown {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(){
         // test sonrasinda driver kapatmak (varsa raporlari dosyalamak) icin kullanilir.
         //driver.quit();
     }
 
     @Test
-    public void selectByIndex() {
+    public void selectByIndex(){
         driver.get("https://demo.guru99.com/test/newtours/register.php");
 
         //Dropdown locate edildi
@@ -50,7 +50,7 @@ public class C02_Dropdown {
     }
 
     @Test
-    public void selectByValue() {
+    public void selectByValue(){
 
         driver.get("https://demo.guru99.com/test/newtours/register.php");
 
@@ -66,7 +66,7 @@ public class C02_Dropdown {
     }
 
     @Test
-    public void selectByVisibleText() {
+    public void selectByVisibleText(){
 
         driver.get("https://demo.guru99.com/test/newtours/register.php");
 
@@ -81,7 +81,7 @@ public class C02_Dropdown {
 
 
     @Test
-    public void multipleSelect() {
+    public void multipleSelect(){
 
         driver.get("https://output.jsbin.com/osebed/2");
 
@@ -97,7 +97,7 @@ public class C02_Dropdown {
     }
 
     @Test
-    public void getOptions() {
+    public void getOptions(){
         driver.get("https://demo.guru99.com/test/newtours/register.php");
 
         Select select = new Select(driver.findElement(By.name("country")));
@@ -106,13 +106,13 @@ public class C02_Dropdown {
         List<WebElement> options = select.getOptions();
 
 
-        for (WebElement option : options) {
+        for(WebElement option : options){
             System.out.println(option.getText());
         }
     }
 
     @Test
-    public void getFirstSelectedOption() {
+    public void getFirstSelectedOption(){
 
         driver.get("https://output.jsbin.com/osebed/2");
 
@@ -126,15 +126,8 @@ public class C02_Dropdown {
 
         //getFirstSelectedOption() metodu secili olan ilk option elementini bize verir. (Sectigimiz ilk option degil !!!)
 
-        @Test
-        public void getFirstSelectedOption () {
-
-            driver.get("https://output.jsbin.com/osebed/2");
-
-            Select select = new Select(driver.findElement(By.id("fruits")));
-
-
-        }
 
     }
+
+
 }
